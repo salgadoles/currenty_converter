@@ -1,5 +1,6 @@
 import customtkinter
 from pegar_moedas import nomes_moedas, conversoes_disponiveis
+from pegar_cotacao import pegar_cotacao_moeda
 
 # Configurações da aparência
 customtkinter.set_appearance_mode("dark")
@@ -33,7 +34,12 @@ selecionadorMoedaFinal = customtkinter.CTkOptionMenu(janela, values=["Selecionar
 
 # Função de conversão
 def conversor():
-    print("converter moeda")
+         moeda_origem = campo_moeda_origem.get()
+      moeda_destino = campo_moeda_destino.get()
+      if moeda_origem and moeda_destino:
+    
+  cotacao = pegar_cotacao_moeda(moeda_origem, moeda_destino)
+    
 
 # Botão de conversão
 botaoConversor = customtkinter.CTkButton(janela, text='Converter', command=conversor)
