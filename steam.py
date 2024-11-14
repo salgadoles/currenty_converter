@@ -39,14 +39,14 @@ def conversor():
       if moeda_origem and moeda_destino:
     
   cotacao = pegar_cotacao_moeda(moeda_origem, moeda_destino)
-    
+    texto_cotacao_moeda.configure(text=f"1 {moeda_origem} ={cotacao} {moeda_destino}")
 
 # Botão de conversão
 botaoConversor = customtkinter.CTkButton(janela, text='Converter', command=conversor)
 
 # Frame de rolagem para exibir a lista de moedas disponíveis
 listaMoedas = customtkinter.CTkScrollableFrame(janela)
-
+texto_cotacao_moeda = customtkinter.CTkLabel(janela, text="" )
 # Adicionando as moedas ao frame
 for codigo_moeda in moedasDisponiveis:
     textoMoeda = customtkinter.CTkLabel(listaMoedas, text=f"{codigo_moedamoeda}: {nomeMoeda}")
@@ -58,6 +58,7 @@ textoMoedaInicio.pack(padx=10, pady=10)
 selecionadorMoedaInicio.pack(padx=10)
 textoMoedaFinal.pack(padx=10, pady=10)
 selecionadorMoedaFinal.pack(padx=10)
+texto_cotacao_moeda.pack(padx=10, pady=10)
 botaoConversor.pack(padx=10, pady=10)
 listaMoedas.pack(padx=10, pady=10)
 
