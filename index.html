@@ -15,6 +15,7 @@
     <div class="form-group">
       <div class="form-control">
         <label>amount</label>
+        <span id="selectedSymbol"></span>
         <input type="number"min="0" value="1" id="amount">
       </div>
       <div class="form-control">
@@ -22,9 +23,17 @@
         <select name="" id="fromCoutry"></select>
       </div>
       <div class="form-control">
+        <label>&nbsp;</label>
+        <i class="fa-solid fa-right-left"></i>
+      </div>
+      <div class="form-control">
         <label>to</label>
         <select name="" id="toCountry"></select>
       </div>
+    </div>
+
+    <div class="form-output">
+      <button>convert</button>
     </div>
   </div>
 </body>

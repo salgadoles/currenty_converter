@@ -38,3 +38,35 @@ body{
   font-size: 15px;
   font-weight: 600;
 }
+
+input::-webkit-inner-spin-button, 
+input::-webkit-outer-spin-button{
+-webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control label {
+  align-items: start;
+  display: flex;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.form-control i {
+border: 1px solid lightblue;
+border-radius: 50%;
+padding: 15px;
+cursor: pointer;
+transform: rotate(0deg);
+transition: 0.3s;
+}
+button{
+  width: 20%;
+  height: 45px;
+  background: #78c1f3;
+  border: none;
+  cursor: pointer;
+  outline: none;
+border-radius: 5px;
+color: #fff;
+}
