@@ -1,0 +1,40 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Poppins" ;
+  box-sizing: border-box;
+}
+
+body{
+  background: #78c1f3;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.container{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.form-group{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 2rem;
+}
+
+.form-group input, select{
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid lightgray;
+  outline: none;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
