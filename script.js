@@ -100,3 +100,24 @@ function sortOptions(selectElement) {
   selectElement.innerHTML = "";
   uniqueOptions.forEach((option) => selectElement.appendChild(option));
 }
+
+function rotateCurrency() {
+    // Selecione o ícone corretamente
+    const rotateIcon = document.querySelector(".fa-right-left");
+  
+    // Alterna a classe rotate para ativar o estilo de rotação
+    rotateIcon.classList.toggle("rotate");
+  
+    // Troca os valores entre os selects
+    let fromCT = fromCoutry.value;
+    let toCT = toCountry.value;
+  
+    fromCoutry.value = toCT;
+    toCountry.value = fromCT;
+  
+    // Atualiza o símbolo da moeda e as bandeiras
+    setCurrenctSymbol();
+    setSelectedCountry(fromCoutry, selectedFromImg);
+    setSelectedCountry(toCountry, selectedToImg);
+  }
+  

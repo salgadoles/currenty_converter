@@ -70,3 +70,13 @@ button{
 border-radius: 5px;
 color: #fff;
 }
+
+img{
+  height: 25px;
+  position: relative;
+  top: 5px;
+}
+
+.rotate{
+  transform: rotate(180deg) !important;
+}
