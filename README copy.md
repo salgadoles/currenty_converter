@@ -1,2 +1,0 @@
-# currenty_converter
-ghhgfgn
