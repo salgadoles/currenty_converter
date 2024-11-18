@@ -155,7 +155,7 @@ function convertCurrency() {
           let stringBuilder = "";
           stringBuilder += `<p>${amount.value} ${selectedFromCountry}</p>`;
           stringBuilder += `<p>${totalExchangeRateTo} ${selectedToCountry}</p>`;
-          stringBuilder += `<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}<span>${lastUpdate}${nextUpdate}</span> </p>`;
+          stringBuilder += `<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}<span>${lastUpdate}<br>${nextUpdate}</span> </p>`;
           formOutput.innerHTML = stringBuilder;
         });
     });

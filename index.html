@@ -16,12 +16,12 @@
       <div class="form-control">
         <label>amount</label>
         <span id="selectedSymbol"></span>
-        <input type="number"min="0" value="1" id="amount">
+        <input type="number"min="0" value="1" id="amount" onkeyup="convertCurrency()">
       </div>
       <div class="form-control">
         <label>from</label>
         <img  id="selectedFromImg">
-        <select name="" id="fromCountry" onchange="setCurrecySymbol()"></select>
+        <select name="" id="fromCountry" onchange="setCurrecySymbol(), convertCurrency()"></select>
       </div>
       <div class="form-control">
         <label>&nbsp;</label>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-output">
-      <button onclick="convertCurrency()">convert</button>
+      <button onclick="convertCurrency(), convertCurrency()">convert</button>
     </div>
   </div>
 </body>
