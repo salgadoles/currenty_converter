@@ -100,3 +100,22 @@ img{
   align-items: center;
   justify-content: space-between;
 }
+
+.clear-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#clearBtn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#clearBtn:hover {
+  background-color: #0056b3;
+}

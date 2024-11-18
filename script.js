@@ -1,11 +1,12 @@
 const amount = document.getElementById("amount"),
-  fromCoutry = document.getElementById("fromCountry"),
+  fromCountry = document.getElementById("fromCountry"),
   toCountry = document.getElementById("toCountry"),
   selectedSymbol = document.getElementById("selectedSymbol"),
   selectedFromImg = document.getElementById("selectedFromImg"),
   selectedToImg = document.getElementById("selectedToImg"),
   Rotate = document.querySelector(".form-control i"),
-  formOutput = document.querySelector(".form-output");
+  formOutput = document.querySelector(".form-output"),
+  clearBtn = document.getElementById("clearBtn");
 
 window.addEventListener("load", () => {
   fetch("https://restcountries.com/v3.1/all")
@@ -51,72 +52,54 @@ window.addEventListener("load", () => {
           option1.setAttribute("data-name", country.name.common);
           option2.setAttribute("data-name", country.name.common);
 
-          fromCoutry.appendChild(option1);
+          fromCountry.appendChild(option1);
           toCountry.appendChild(option2);
         }
       });
 
-      sortOptions(fromCoutry);
+      sortOptions(fromCountry);
       sortOptions(toCountry);
 
-      fromCoutry.value = "INR";
+      fromCountry.value = "INR";
       toCountry.value = "USD";
 
       setCurrenctSymbol();
-      setSelectedCountry(fromCoutry, selectedFromImg);
+      setSelectedCountry(fromCountry, selectedFromImg);
       setSelectedCountry(toCountry, selectedToImg);
     });
 });
 
 function setCurrenctSymbol() {
   let selectedCrSymbol =
-    fromCoutry.options[fromCoutry.selectedIndex].getAttribute("data-symbol");
+    fromCountry.options[fromCountry.selectedIndex].getAttribute("data-symbol");
   selectedSymbol.innerHTML = selectedCrSymbol;
 }
 
 function setSelectedCountry(optionElement, imgElement) {
   let selectedCrImg =
-    optionElement.options[optionElement.selectedIndex].getAttribute(
-      "data-image"
-    );
+    optionElement.options[optionElement.selectedIndex].getAttribute("data-image");
   imgElement.setAttribute("src", selectedCrImg);
-}
-
-function sortOptions(selectElement) {
-  let options = Array.from(selectElement.options);
-
-  let uniqueOptions = [
-    ...new Map(options.map((item) => [item.text, item])).values(),
-  ];
-
-  uniqueOptions.sort((a, b) =>
-    a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"))
-  );
-
-  selectElement.innerHTML = "";
-  uniqueOptions.forEach((option) => selectElement.appendChild(option));
 }
 
 function rotateCurrency() {
   const rotateIcon = document.querySelector(".fa-right-left");
   rotateIcon.classList.toggle("rotate");
 
-  let fromCT = fromCoutry.value;
+  let fromCT = fromCountry.value;
   let toCT = toCountry.value;
 
-  fromCoutry.value = toCT;
+  fromCountry.value = toCT;
   toCountry.value = fromCT;
 
   setCurrenctSymbol();
-  setSelectedCountry(fromCoutry, selectedFromImg);
-  setSelectedCountry(toCountry, selectedToImg);
-
+  setSelectedCountry(fromCountry, selectedFromImg); 
+  setSelectedCountry(toCountry, selectedToImg);  
   convertCurrency();
 }
 
 function convertCurrency() {
   fetch(
-    `https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/${fromCoutry.value}`
+    `https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/${fromCountry.value}`
   )
     .then((response) => response.json())
     .then((data1) => {
@@ -136,7 +119,7 @@ function convertCurrency() {
           ).toLocaleString();
 
           let selectedFromCountry =
-            fromCoutry.options[fromCoutry.selectedIndex].getAttribute(
+            fromCountry.options[fromCountry.selectedIndex].getAttribute(
               "data-currency"
             );
 
@@ -155,8 +138,18 @@ function convertCurrency() {
           let stringBuilder = "";
           stringBuilder += `<p>${amount.value} ${selectedFromCountry}</p>`;
           stringBuilder += `<p>${totalExchangeRateTo} ${selectedToCountry}</p>`;
-          stringBuilder += `<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}<span>${lastUpdate}<br>${nextUpdate}</span> </p>`;
+          stringBuilder += `<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCountry.value}<span>${lastUpdate}<br>${nextUpdate}</span> </p>`;
           formOutput.innerHTML = stringBuilder;
         });
     });
+}
+
+function clearConversion() {
+  amount.value = "";
+  selectedSymbol.innerHTML = "";
+  selectedFromImg.setAttribute("src", "");
+  selectedToImg.setAttribute("src", "");
+  formOutput.innerHTML = "";
+  fromCountry.value = "";
+  toCountry.value = "";
 }

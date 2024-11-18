@@ -3,7 +3,7 @@
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Page Title</title>
+  <title>Currency Converter</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
   <script defer src='script.js'></script>
@@ -14,28 +14,31 @@
     <h2>Currency Converter</h2>
     <div class="form-group">
       <div class="form-control">
-        <label>amount</label>
+        <label>Amount</label>
         <span id="selectedSymbol"></span>
-        <input type="number"min="0" value="1" id="amount" onkeyup="convertCurrency()">
+        <input type="number" min="0" value="1" id="amount" onkeyup="convertCurrency()">
       </div>
       <div class="form-control">
-        <label>from</label>
-        <img  id="selectedFromImg">
-        <select name="" id="fromCountry" onchange="setCurrecySymbol(), convertCurrency()"></select>
+        <label>From</label>
+        <img id="selectedFromImg">
+        <select name="" id="fromCountry" onchange="setCurrenctSymbol(), setSelectedCountry(fromCountry, selectedFromImg), convertCurrency()"></select>
       </div>
       <div class="form-control">
         <label>&nbsp;</label>
         <i class="fa-solid fa-right-left rotate" onclick="rotateCurrency()"></i>
       </div>
       <div class="form-control">
-        <label>to</label>
+        <label>To</label>
         <img id="selectedToImg">
-        <select name="" id="toCountry"></select>
+        <select name="" id="toCountry" onchange="setSelectedCountry(toCountry, selectedToImg), convertCurrency()"></select>
       </div>
     </div>
-
     <div class="form-output">
-      <button onclick="convertCurrency(), convertCurrency()">convert</button>
+      <button onclick="convertCurrency()">Convert</button>
+    </div>
+
+    <div class="clear-button">
+      <button id="clearBtn" onclick="clearConversion()">Clear</button>
     </div>
   </div>
 </body>
