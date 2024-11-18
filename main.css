@@ -8,13 +8,39 @@
 }
 
 body{
-  background: #78c1f3;
+  margin: 0;
+  padding: 0;
    height: 100vh;
    display: flex;
    align-items: center;
    justify-content: center;
 }
 
+.grid-container{
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr; 
+grid-template-rows: 0.2fr 3fr;
+grid-template-areas: 0; 
+height: 100vh;
+}
+
+.header{
+  grid-area: header;
+  height: 70px;
+  background-color: royalblue;
+  
+}
+
+#sidebar{
+  grid-area: sidebar;
+  height: 100%;
+  background-color: grey;
+}
+
+.main-container{
+  grid-area: main;
+  background-color: beige;
+}
 .container{
   background: #fff;
   padding: 2rem;
