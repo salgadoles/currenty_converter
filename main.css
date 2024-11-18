@@ -80,3 +80,21 @@ img{
 .rotate{
   transform: rotate(180deg) !important;
 }
+
+.form-output p{
+  margin: 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-output p:nth-child(2){
+  font-size: 30px;
+  color: rgb(46,60,87,);
+}
+
+.form-output p:nth-child(3){
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

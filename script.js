@@ -56,11 +56,9 @@ window.addEventListener("load", () => {
         }
       });
 
-      // Ordenar as opções
       sortOptions(fromCoutry);
       sortOptions(toCountry);
 
-      // Configurar valores padrão
       fromCoutry.value = "INR";
       toCountry.value = "USD";
 
@@ -87,7 +85,6 @@ function setSelectedCountry(optionElement, imgElement) {
 function sortOptions(selectElement) {
   let options = Array.from(selectElement.options);
 
-  // Remover duplicatas e ordenar
   let uniqueOptions = [
     ...new Map(options.map((item) => [item.text, item])).values(),
   ];
@@ -96,62 +93,70 @@ function sortOptions(selectElement) {
     a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"))
   );
 
-  // Atualizar o select com as opções ordenadas
   selectElement.innerHTML = "";
   uniqueOptions.forEach((option) => selectElement.appendChild(option));
 }
 
 function rotateCurrency() {
-    // Selecione o ícone corretamente
-    const rotateIcon = document.querySelector(".fa-right-left");
-  
-    // Alterna a classe rotate para ativar o estilo de rotação
-    rotateIcon.classList.toggle("rotate");
-  
-    // Troca os valores entre os selects
-    let fromCT = fromCoutry.value;
-    let toCT = toCountry.value;
-  
-    fromCoutry.value = toCT;
-    toCountry.value = fromCT;
-  
-    // Atualiza o símbolo da moeda e as bandeiras
-    setCurrenctSymbol();
-    setSelectedCountry(fromCoutry, selectedFromImg);
-    setSelectedCountry(toCountry, selectedToImg);
+  const rotateIcon = document.querySelector(".fa-right-left");
+  rotateIcon.classList.toggle("rotate");
 
-    convertCurrency();
-  }
-  
+  let fromCT = fromCoutry.value;
+  let toCT = toCountry.value;
 
-  function convertCurrency(){
-    fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ fromCoutry.value).then((response)=>response.json()).then((data1) => {
-    
+  fromCoutry.value = toCT;
+  toCountry.value = fromCT;
 
-      fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ toCountry.value).then((response)=>response.json()).then((data2) => {
-  
-  
-        let exchangeRatesFrom = data2.conversion_rates[toCountry.value];
-        let totalExchangeRatesFrom = (amount.value*exchangeRatesFrom).toLocaleString();
-        
-    
+  setCurrenctSymbol();
+  setSelectedCountry(fromCoutry, selectedFromImg);
+  setSelectedCountry(toCountry, selectedToImg);
 
-      let exchangeRateTo = data1.conversion_rates[toCountry.value];
-      let totalExchangeRateTo = (amount.value*exchangeRateTo).toLocaleString();
-      
-      let selectedFromCountry =
-    fromCoutry.options[fromCoutry.selectedIndex].getAttribute("data-currency");
+  convertCurrency();
+}
 
-    let selectedToCountry =
-    toCountry.options[toCountry.selectedIndex].getAttribute("data-currency");
-  
-let stringBuilder = "";
-stringBuilder+=`<p>${amount.value} ${ selectedFromCountry}</p?`;
-stringBuilder+= `<p>${totalExchangeRateTo} ${selectedToCountry}</p>`
-stringBuilder+=`<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}</p>`
-formOutput.innerHTML=stringBuilder;
+function convertCurrency() {
+  fetch(
+    `https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/${fromCoutry.value}`
+  )
+    .then((response) => response.json())
+    .then((data1) => {
+      fetch(
+        `https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/${toCountry.value}`
+      )
+        .then((response) => response.json())
+        .then((data2) => {
+          let exchangeRatesFrom = data2.conversion_rates[toCountry.value];
+          let totalExchangeRatesFrom = (
+            amount.value * exchangeRatesFrom
+          ).toLocaleString();
 
-      });
+          let exchangeRateTo = data1.conversion_rates[toCountry.value];
+          let totalExchangeRateTo = (
+            amount.value * exchangeRateTo
+          ).toLocaleString();
+
+          let selectedFromCountry =
+            fromCoutry.options[fromCoutry.selectedIndex].getAttribute(
+              "data-currency"
+            );
+
+          let selectedToCountry =
+            toCountry.options[toCountry.selectedIndex].getAttribute(
+              "data-currency"
+            );
+
+          let lastUpdate =
+            "Last update: " +
+            data1.time_last_update_utc.split("00:00:01")[0];
+          let nextUpdate =
+            "Next update on: " +
+            data1.time_next_update_utc.split("00:00:01")[0];
+
+          let stringBuilder = "";
+          stringBuilder += `<p>${amount.value} ${selectedFromCountry}</p>`;
+          stringBuilder += `<p>${totalExchangeRateTo} ${selectedToCountry}</p>`;
+          stringBuilder += `<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}<span>${lastUpdate}${nextUpdate}</span> </p>`;
+          formOutput.innerHTML = stringBuilder;
+        });
     });
-  
-  }
+}
