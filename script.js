@@ -121,3 +121,10 @@ function rotateCurrency() {
     setSelectedCountry(toCountry, selectedToImg);
   }
   
+
+  function convertCurrency(){
+    fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ fromCoutry.value).then((response)=>response.json()).then((data) => {
+      console.log(data);
+    });
+  
+  }
