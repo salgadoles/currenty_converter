@@ -4,9 +4,17 @@ align="center">
 
 
 
-<br>
+
 
 </p>
+
+---
+
+<br>
+<br>
+<br>
+
+
 <h1 style="text-align: center;">Project Currency Converter</h1>
 
 <br>
