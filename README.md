@@ -7,7 +7,7 @@ align="center">
 </p>
 
 ---
-<h1 style="text-align: center;">What Translation❓❓</h1>
+<h1 style="text-align: center;">Currency Converter</h1>
 
 ---
 
