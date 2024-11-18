@@ -119,12 +119,39 @@ function rotateCurrency() {
     setCurrenctSymbol();
     setSelectedCountry(fromCoutry, selectedFromImg);
     setSelectedCountry(toCountry, selectedToImg);
+
+    convertCurrency();
   }
   
 
   function convertCurrency(){
-    fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ fromCoutry.value).then((response)=>response.json()).then((data) => {
-      console.log(data);
+    fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ fromCoutry.value).then((response)=>response.json()).then((data1) => {
+    
+
+      fetch("https://v6.exchangerate-api.com/v6/cdbcf1df6c8cc80bb2113586/latest/"+ toCountry.value).then((response)=>response.json()).then((data2) => {
+  
+  
+        let exchangeRatesFrom = data2.conversion_rates[toCountry.value];
+        let totalExchangeRatesFrom = (amount.value*exchangeRatesFrom).toLocaleString();
+        
+    
+
+      let exchangeRateTo = data1.conversion_rates[toCountry.value];
+      let totalExchangeRateTo = (amount.value*exchangeRateTo).toLocaleString();
+      
+      let selectedFromCountry =
+    fromCoutry.options[fromCoutry.selectedIndex].getAttribute("data-currency");
+
+    let selectedToCountry =
+    toCountry.options[toCountry.selectedIndex].getAttribute("data-currency");
+  
+let stringBuilder = "";
+stringBuilder+=`<p>${amount.value} ${ selectedFromCountry}</p?`;
+stringBuilder+= `<p>${totalExchangeRateTo} ${selectedToCountry}</p>`
+stringBuilder+=`<p>${amount.value}${toCountry.value} = ${totalExchangeRatesFrom}${fromCoutry.value}</p>`
+formOutput.innerHTML=stringBuilder;
+
+      });
     });
   
   }
