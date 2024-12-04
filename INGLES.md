@@ -14,7 +14,7 @@
 <br>
 <br>
 
-Here is the improved text:
+
 
 ---
 
